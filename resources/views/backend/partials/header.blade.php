@@ -20,7 +20,7 @@
                     <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdown">
                         <a class="dropdown-item" href="profile.html"><i class="ik ik-user dropdown-icon"></i> Profile</a>
 
-                        <a class="dropdown-item" href="login.html"><i class="ik ik-power dropdown-icon"></i> Logout</a>
+                        <a class="dropdown-item" href="{{ route('admin.logout') }}"><i class="ik ik-power dropdown-icon"></i> Logout</a>
                     </div>
                 </div>
 

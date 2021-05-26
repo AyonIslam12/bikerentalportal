@@ -31,7 +31,7 @@
                     </tr>
                     <tr>
                         <th>Bike Model Year</th>
-                        </tr>
+                        <td>{{ date("Y-m-d",strtotime($bike->year)) }}</td>
                     <tr>
                         <th>Bike Color</th>
                         <td>{{ $bike->color}}</td>
@@ -63,6 +63,10 @@
                     <tr>
                         <th>Price/Day</th>
                         <td>{{$bike->price_per_day}}.00 TK</td>
+                    </tr>
+                    <tr>
+                        <th>Discount Price</th>
+                        <td>{{$bike->discount_offer}}.00 TK</td>
                     </tr>
 
 

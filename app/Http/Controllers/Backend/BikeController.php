@@ -32,7 +32,8 @@ class BikeController extends Controller
            'odo'=> 'required|min:2|max:10',
            'number'=> 'required|min:2|max:10',
            'description'=> 'required|min:2|max:10',
-           'price_per_day'=> 'required|min:2|max:10',
+           'price_per_day'=> 'required',
+           'discount_offer'=> 'required',
 
 
         ]);
@@ -59,6 +60,7 @@ class BikeController extends Controller
             'number' => $request-> number,
             'description' => $request-> description,
             'price_per_day' => $request-> price_per_day,
+            'discount_offer' => $request-> discount_offer,
         ]);
         return redirect()->route('admin.bike.list')->with('success','Data Inserted Successfully');
         }
@@ -73,9 +75,10 @@ class BikeController extends Controller
         }
         public function update(Request $request, $id){
 
+
             $request-> validate([
 
-                'image'=> 'required|image',
+
                 'name'=> 'required|min:2|max:10',
                 'brand'=> 'required|min:2|max:10',
                 'model'=> 'required|min:2|max:10',
@@ -86,11 +89,41 @@ class BikeController extends Controller
                 'odo'=> 'required|min:2|max:10',
                 'number'=> 'required|min:2|max:10',
                 'description'=> 'required|min:2|max:10',
-                'price_per_day'=> 'required|min:2|max:10',
-
-
+                'price_per_day'=> 'required',
+                'discount_offer'=> 'required',
              ]);
+
             $bike = Bike::find($id);
+
+            if($request->hasFile('image')){
+                $file = $request->file('image');
+                if($file->isValid()){
+                    $filename = date('Ymdhms').'.'.$file->getClientOriginalExtension();
+                    $file->storeAs('bikes',$filename);
+                }
+                if (file_exists(public_path('uploads/bikes/'.$bike->image)))
+                unlink(public_path('uploads/bikes/'.$bike->image));
+            }else{
+                $filename = $bike->image;
+            }
+
+         $bike->update([
+                'image' => $filename,
+                'name' => $request-> name,
+                'brand' => $request-> brand,
+                'model' => $request-> model,
+                'year' => $request->year,
+                'color' => $request-> color,
+                'cc' => $request-> cc,
+                'power' => $request-> power,
+                'torque' => $request-> torque,
+                'odo' => $request-> odo,
+                'number' => $request-> number,
+                'description' => $request-> description,
+                'price_per_day' => $request-> price_per_day,
+                'discount_offer' => $request-> discount_offer,
+            ]);
+            return redirect()->route('admin.bike.list')->with('success','Data Update Successfully');
 
         }
 

@@ -18,7 +18,7 @@
                 <a href="{{route('admin.dashboard')}}"><i class="ik ik-bar-chart-2"></i><span>Dashboard</span></a>
             </div>
 
-            <div class="nav-item has-sub {{request()->is('admin/bike/list') ? 'active' : ''}}">
+            <div class="nav-item has-sub {{request()->is('admin/bike/list','admin/bike/create') ? 'active' : ''}}">
                 <a href="javascript:void(0)"><i class="ik ik-layers"></i><span>Bikes</span></a>
                 <div class="submenu-content">
                     <a href="{{route('admin.bike.list')}}" class="menu-item {{request()->is('admin/bike/list') ? 'active' : ''}}">Bike List</a>
@@ -26,6 +26,26 @@
 
                 </div>
 
+            </div>
+
+            <div class="nav-item  ">
+                <a class="{{request()->is('admin/insurance/lists') ? 'active' : ''}}" href=""><i class="ik ik-layers "></i><span>Bookings</span></a>
+            </div>
+
+            <div class="nav-item has-sub {{request()->is('admin/user/lists') ? 'active' : ''}}">
+                <a href="javascript:void(0)"><i class="ik ik-layers"></i><span>Customers</span></a>
+                <div class="submenu-content">
+                    <a href="{{route('admin.user.list')}}" class="menu-item {{request()->is('admin/user/lists') ? 'active' : ''}}">Customer List</a>
+
+
+                </div>
+
+            </div>
+            <div class="nav-item  ">
+                <a class="{{request()->is('admin/insurance/lists') ? 'active' : ''}}" href="{{ route('admin.insurance.list') }}"><i class="ik ik-layers "></i><span>Insurance</span></a>
+            </div>
+            <div class="nav-item  ">
+                <a class="{{request()->is('admin/insurance/lists') ? 'active' : ''}}" href=""><i class="ik ik-layers "></i><span>Payments</span></a>
             </div>
 
 

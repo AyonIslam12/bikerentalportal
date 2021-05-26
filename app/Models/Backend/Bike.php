@@ -21,7 +21,8 @@ class Bike extends Model
         'odo',
         'number',
         'description',
-        'price_per_day'
+        'price_per_day',
+        'discount_offer',
 
     ];
 }

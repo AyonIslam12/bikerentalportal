@@ -42,7 +42,7 @@
 
   <div class="form-group">
     <label for="year">Year</label>
-    <input type="date" class="form-control  @error('year') is-invalid @enderror" id="year" name="year" placeholder="Enter Year" value="{{$bike->year}}">
+    <input type="date" class="form-control  @error('year') is-invalid @enderror" id="year" name="year" placeholder="Enter Year" value="{{ date("Y-m-y",strtotime($bike->year))}}">
     @error('year') <span class="text-danger"> {{$message}} </span> @enderror
   </div>
 
@@ -92,6 +92,11 @@
     <label for="price_per_day">Price per Day</label>
     <input type="number" class="form-control  @error('price_per_day') is-invalid @enderror" id="price_per_day" name="price_per_day" placeholder="Enter Price " value="{{$bike->price_per_day}}">
     @error('price_per_day') <span class="text-danger"> {{$message}} </span> @enderror
+  </div>
+  <div class="form-group">
+    <label for="discount_offer">Discount Offer</label>
+    <input type="number" class="form-control  @error('discount_offer') is-invalid @enderror" id="price_per_day" name="discount_offer"  value="{{$bike->discount_offer}}">
+    @error('discount_offer') <span class="text-danger"> {{$message}} </span> @enderror
   </div>
 
 

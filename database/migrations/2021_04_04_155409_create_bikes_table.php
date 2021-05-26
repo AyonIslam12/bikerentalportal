@@ -28,6 +28,7 @@ class CreateBikesTable extends Migration
             $table->string('number');
             $table->string('description');
             $table->double('price_per_day');
+            $table->double('discount_offer')->default(0.0);
             $table->timestamps();
         });
     }

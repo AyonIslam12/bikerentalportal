@@ -32,6 +32,7 @@
 
       <th scope="col">Number Plate</th>
       <th scope="col">Price/day</th>
+      <th scope="col">Discount Price</th>
       <th class="text-center" scope="col">Action</th>
 
     </tr>
@@ -47,6 +48,7 @@
       <td>{{$e->model}}</td>
       <td>{{$e->number}}</td>
       <td>{{$e->price_per_day}}.00 TK</td>
+      <td>{{$e->discount_offer}}.00 TK</td>
 
       <td class="d-flex">
           <a class="btn btn-primary mx-1" href="{{route('admin.bike.show',$e->id)}}"> View</a>

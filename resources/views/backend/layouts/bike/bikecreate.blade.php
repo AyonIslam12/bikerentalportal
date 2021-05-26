@@ -92,6 +92,11 @@
     <input type="number" class="form-control  @error('price_per_day') is-invalid @enderror" id="price_per_day" name="price_per_day" placeholder="Enter Price " value="{{old('price_per_day')}}">
     @error('price_per_day') <span class="text-danger"> {{$message}} </span> @enderror
   </div>
+  <div class="form-group">
+    <label for="discount_offer">Discount Price</label>
+    <input type="number" class="form-control  @error('discount_offer') is-invalid @enderror" id="discount_offer" name="discount_offer" placeholder="Enter Dicount Price " value="{{old('discount_offer')}}">
+    @error('discount_offer') <span class="text-danger"> {{$message}} </span> @enderror
+  </div>
 
 
 

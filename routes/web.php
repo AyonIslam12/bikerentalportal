@@ -2,12 +2,17 @@
 
 use App\Http\Controllers\Backend\AdminController;
 use App\Http\Controllers\Backend\BikeController;
+use App\Http\Controllers\Backend\BookingController as BackendBookingController;
 use App\Http\Controllers\Backend\CustomerController;
 use App\Http\Controllers\Backend\InsuranceController;
+use App\Http\Controllers\Backend\PaymentController;
+use App\Http\Controllers\Backend\ReportController;
 use App\Http\Controllers\Backend\UserController as BackendUserController;
+use App\Http\Controllers\Frontend\BookingController;
 use App\Http\Controllers\Frontend\FrontBikeController;
 use App\Http\Controllers\Frontend\FrontController;
 use App\Http\Controllers\Frontend\UserController;
+use App\Http\Controllers\Frontend\UserProfile;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -32,22 +37,43 @@ use Illuminate\Support\Facades\Route;
 
 Route::prefix('/')->name('kbr.')->group(function(){
 
+
+    //Login Login
+    Route::get('/user/registration',[UserController::class,'registrationFrom'])->name('user.registration');
+    Route::post('/user/register',[UserController::class,'register'])->name('user.register');
+    Route::get('user/login',[UserController::class,'loginForm'])->name('user.login.form');
+    Route::post('user/do-login',[UserController::class,'login'])->name('user.login');
+
+
+    Route::group(['middleware' => 'auth'],function () {
+    Route::get('user/logout',[UserController::class,'logout'])->name('user.logout');
+    Route::post('/bike-booking',[BookingController::class,'booking'])->name('bike.booking');
+
+    //user profile
+
+    Route::get('/user/profile',[UserProfile::class,'index'])->name('user.profile.home');
+    Route::get('/user/profile/edit/{id}',[UserProfile::class,'profileEdit'])->name('user.profile.edit');
+    Route::put('/userprofile/update/{id}',[UserProfile::class,'profileUpdate'])->name('user.profile.update');
+    Route::get('/user/booking/history',[UserProfile::class,'bookingHistory'])->name('user.booking.history');
+
+//Update Password
+    Route::get('/user/update-password',[UserProfile::class,'password'])->name('user.edit.password');
+    Route::Post('/user/update-password',[UserProfile::class,'updatePassword'])->name('user.update.password');
+
+    });
+
+
     //Route::get('/kbr',[FrontController::class,'master'])->name('master');
     Route::get('/',[FrontController::class,'home'])->name('home');
     Route::get('/about',[FrontController::class,'about'])->name('about');
     Route::get('/contuctus',[FrontController::class,'contuctus'])->name('contuctus');
     Route::get('/terms',[FrontController::class,'terms'])->name('terms');
 
-//bike
+    //bike
     Route::get('/our-bikes',[FrontBikeController::class,'bikes'])->name('bikes');
     Route::get('/bikes/singleview/{id}',[FrontBikeController::class,'singleview'])->name('bikes.singleview');
 
-   //user routes
-    Route::prefix('/user')->name('user.')->group(function(){
-        Route::get('/registration',[UserController::class,'registration'])->name('registration');
 
-
-    });
 
 });
 
@@ -99,6 +125,23 @@ Route::get('/admin/insurance/show/{id}',[InsuranceController::class,'show'])->na
 Route::put('/admin/insurance/update/{id}',[InsuranceController::class,'update'])->name('admin.insurance.update');
 Route::get('/admin/insurance/delete/{id}',[InsuranceController::class,'delete'])->name('admin.insurance.delete');
 
+ //Booking Route Group
+    Route::get('admin/booking/list',[BackendBookingController::class,'index'])->name('admin.booking.manage');
+    Route::get('admin/booking/show/{id}',[BackendBookingController::class,'show'])->name('admin.booking.show');
+    Route::get('admin/booking/delete/{id}',[BackendBookingController::class,'destroy'])->name('admin.booking.delete');
+    Route::get('admin/booking/booking/{id}/{status}',[BackendBookingController::class,'updateStatus'])->name('admin.booking.status');
+    //Payment In Per Booking
+    Route::get('payment/{id}',[BackendBookingController::class,'paymentShow'])->name('admin.booking.payment');
+    Route::get('payment/show-form/{id}',[BackendBookingController::class,'paymentShowFrom'])->name('admin.booking.payment.show');
+    Route::post('payment/create',[BackendBookingController::class,'paymentCreate'])->name('admin.booking.payment.create');
+
+    //Payment Route
+
+    Route::get('admin/payment/lists',[PaymentController::class,'index'])->name('admin.payment.list');
+    Route::get('admin/payment/show/{id}',[PaymentController::class,'show'])->name('admin.payment.show');
+
+      //Report Route
+     Route::get('/admin/report/booking',[ReportController::class,'bookingReport'])->name('admin.report.booking');
 
 
 });

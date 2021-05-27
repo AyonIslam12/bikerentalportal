@@ -3,13 +3,22 @@
 namespace App\Http\Controllers\Backend;
 
 use App\Http\Controllers\Controller;
+use App\Models\backend\Bike;
+use App\Models\Booking;
+use App\Models\Insurance;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class AdminController extends Controller
 {
     public function dashboard(){
-        return view('backend.layouts.dashboard');
+        $bike = Bike::all();
+        $customer = User::where('role', '=', 'customer')->get();
+        $booking = Booking::all();
+        $insurance = Insurance::all();
+
+        return view('backend.layouts.dashboard',\compact('bike','customer','booking','insurance'));
     }
     public function login(){
         return \view('backend.auth.login');

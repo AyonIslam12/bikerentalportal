@@ -12,6 +12,7 @@
         @yield('title')
 
     </title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" >
 	<link rel="icon" href="{{ asset('frontend/assets/images/thumbnail.png')}}">
 	<link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Rubik:300,400,500,700,900&amp;display=swap'>
 	<link rel='stylesheet' href="{{ asset('frontend/assets/css/plugins.css')}}">
@@ -29,11 +30,18 @@
 		</div>
 	</div> -->
 
+  <div class="container-fluid">
     @include('frontend.partials.header')
 
 
 
-    @yield('content')
+    <div class="row">
+        <div class="col-12">
+          @yield('content')
+
+        </div>
+
+    </div>
 
 
 
@@ -42,15 +50,19 @@
 
 
 
-                                                    @include('frontend.partials.footer')
+  @include('frontend.partials.footer')
+
+
+  </div>
 
 
 
+<div id="backtotop"><i class="fal fa-lg fa-arrow-up"></i>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" ></script>
+<script data-cfasync="false" src="../../cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script src="{{ asset('frontend/assets/js/plugins.js')}}"></script>
+<script src="{{ asset('frontend/assets/js/main.js')}}"></script>
+</body>
 
-													<div id="backtotop"><i class="fal fa-lg fa-arrow-up"></i></div>
-													<script data-cfasync="false" src="../../cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script src="{{ asset('frontend/assets/js/plugins.js')}}"></script>
-													<script src="{{ asset('frontend/assets/js/main.js')}}"></script>
-												</body>
-
-												<!-- Mirrored from themebing.com/html/sayara/index-3.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 30 Apr 2021 17:57:27 GMT -->
-												</html>
+<!-- Mirrored from themebing.com/html/sayara/index-3.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 30 Apr 2021 17:57:27 GMT -->
+</html>

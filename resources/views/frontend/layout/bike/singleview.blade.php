@@ -37,23 +37,43 @@
 
                                 <div class="col-lg-9 my-auto border mt-3">
                                     <div class="comment-respond">
+                                        <div class="row">
+                                            <div class="col-md-8 offset-2">
+                                              @if(session('message'))
+                                              <div class="alert alert-{{ session('type') }}">
+                                                   <p class="text-center font-weight-bolder text-dark">{{ session('message') }}</p>
+                                              </div>
+                                            @endif
+
+                                            </div>
+
+                                        </div>
                                         <h3 class="comment-reply-title">Please Rent From Here</h3>
-                                        <form action="#" method="post" class="comment-form row">
+                                        <form action="{{ route('kbr.bike.booking') }}" method="post" class="comment-form row">
+                                            @csrf
                                         <div class="col-lg-6 form-group">
                                             <label for="">Form Date</label>
-                                        <input id="author" name="author" type="date" value={{ date("Y-m-d") }} min={{ date("Y-m-d") }} class="form-control" aria-required="true">
+                                            <input type="hidden" name="bike_id" value="{{ $bike->id }}">
+                                            <input type="date" name="from_date"  value="{{ date('Y-m-d') }}" min="{{ date('Y-m-d') }}"  class="form-control @error('from_date') is-invalid @enderror">
+                                            @error('from_date') <span class="text-danger font-italic d-block">{{ $message }}</span> @enderror
                                         </div>
                                         <div class="col-lg-6 form-group">
                                             <label for="">To Date</label>
-                                            <input id="author" name="author" type="date" value={{ date("Y-m-d") }} class="form-control" aria-required="true">
+                                            <input type="date" name="to_date"  value="{{ old('to_date') }}" class="form-control @error('to_date') is-invalid @enderror">
+                                            @error('to_date') <span class="text-danger font-italic d-block">{{ $message }}</span> @enderror
                                         </div>
                                         <div class="col-xl-12">
-                                        <textarea id="comment" name="comment" placeholder="Type your comment...." aria-required="true"></textarea>
+                                        <textarea id="comment" name="details" placeholder="Type your comment...." aria-required="true"></textarea>
                                         </div>
-                                        <div class="custom-control custom-checkbox mx-3">
-                                            <input type="checkbox" class="custom-control-input" id="customCheck" name="example1">
-                                            <label class="custom-control-label" for="customCheck">Priamry Medical Insurance</label>
-                                          </div>
+                                        <div class="col-xl-12">
+                                            <label for="insurance_id"> <p class="text-warning font-weight-bold">Please Select This Insurance</p>
+                                                @foreach($insurances as $key => $value)
+                                                <input type="checkbox" class="form-control @error('insurance_id') is-invalid @enderror" id="insurance_id" name="insurance_id" value="{{ $value->id }}"> <span class="text-success font-weight-bold">{{ $value->name }}</span>
+                                                @error('insurance_id') <span class="text-danger font-italic d-block">{{ $message }}</span> @enderror
+                                                @endforeach
+                                            </label>
+                                        </div>
+
                                         <div class="col-lg-12 text-right">
                                         <button type="submit" class="my-2">Book Now</button>
                                         </div>
